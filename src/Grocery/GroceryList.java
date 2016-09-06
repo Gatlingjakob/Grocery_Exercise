@@ -1,25 +1,37 @@
 package Grocery;
 
-import Grocery.Grocery;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
+import java.util.Arrays;
 
 /**
  * Created by 3299779 on 25/08/2016.
  */
-public class GroceryList {
+public class GroceryList<E> {
 
-    public void createGroceryList (ArrayList<Grocery> g) {
+    private static final int SIZE = 10;
+    private Object elementData[]={};
+    private int size = 0;
 
-        Scanner input = new Scanner(System.in);
+    public GroceryList() {
 
-        String answer = input.next();
-        for (int i = 1; i <= g.size();i++;) {
-            System.out.println("Type in Grocery");
-            g.get(i)
-        }
+        elementData = new Object[SIZE];
     }
 
+    public void add(E e) {
+        if (size == elementData.length) {
+            expand();
+        }
+            elementData[size++] = e;
+    }
+
+    private void expand() {
+        int newSize = elementData.length * 2;
+        elementData = Arrays.copyOf(elementData, newSize);
+    }
+
+    public void print() {
+        System.out.println("GroceryList contains: ");
+        for(int i = 0; i < size; i++){
+            System.out.println(elementData[i]+" ");
+        }
+    }
 }
